@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces;
 using Domain.RegionalAggregate;
+using FluentValidation;
 using Moq;
 using UseCase.ContatoUseCase.Adicionar;
 using UseCase.Interfaces;
@@ -10,14 +11,16 @@ namespace UnitTest.UseCase.ContatoUseCase.Adicionar
     {
         private readonly AdicionarContatoDtoBuilder _builder;
         private readonly Mock<IContatoRepository> _contatoRepository;
+        private readonly IValidator<AdicionarContatoDto> _validator;
         private readonly IAdicionarContatoUseCase _adicionarContatoUseCase;
 
         public AdicionarContatoUseCaseTest()
         {
+            _validator = new AdicionarContatoValidator();
             _contatoRepository = new Mock<IContatoRepository>();
             _builder = new AdicionarContatoDtoBuilder();
 
-            _adicionarContatoUseCase = new AdicionarContatoUseCase(_contatoRepository.Object);
+            _adicionarContatoUseCase = new AdicionarContatoUseCase(_contatoRepository.Object, _validator);
 
         }
 
@@ -25,7 +28,8 @@ namespace UnitTest.UseCase.ContatoUseCase.Adicionar
         public void AdicionarContatoUseCase_Adicionar_Sucesso()
         {
             // Arrange
-            var adicionarContatoDto = _builder.Default().Build();
+            Guid id = Guid.NewGuid();
+            var adicionarContatoDto = _builder.Default().WithId(id).Build();
             _contatoRepository.Setup(s => s.Adicionar(It.IsAny<Contato>()));
 
             // Act

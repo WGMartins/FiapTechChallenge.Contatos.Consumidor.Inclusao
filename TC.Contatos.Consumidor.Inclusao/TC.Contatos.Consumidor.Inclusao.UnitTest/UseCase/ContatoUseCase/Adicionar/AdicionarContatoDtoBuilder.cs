@@ -29,6 +29,12 @@ namespace UnitTest.UseCase.ContatoUseCase.Adicionar
             return this;
         }
 
+        public AdicionarContatoDtoBuilder WithId(Guid id)
+        {
+            _adicionarContatoDto.Id = id;
+            return this;
+        }
+
         public AdicionarContatoDtoBuilder WithName(string nome)
         {
             _adicionarContatoDto.Nome = nome;

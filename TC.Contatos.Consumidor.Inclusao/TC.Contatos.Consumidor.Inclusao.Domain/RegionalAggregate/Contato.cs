@@ -32,11 +32,10 @@ namespace Domain.RegionalAggregate
             RegionalId = regionalId;
         }
 
-        public static Contato Criar(string nome, string telefone, string email, Guid regionalId)
+        public static Contato Criar(Guid id, string nome, string telefone, string email, Guid regionalId)
         {
             if (string.IsNullOrWhiteSpace(nome))
                 throw new ArgumentException("Nome do Contato inválido");
-
 
             if (string.IsNullOrWhiteSpace(telefone) || !ValidarTelefone(telefone))
                 throw new ArgumentException("Telefone inválido");
@@ -45,7 +44,7 @@ namespace Domain.RegionalAggregate
                 throw new ArgumentException("E-mail inválido");
 
 
-            return new Contato(nome, telefone, email, regionalId);
+            return new Contato(id, nome, telefone, email, regionalId);
         }
 
         public Contato Alterar(string nome, string telefone, string email, Guid regionalId)
