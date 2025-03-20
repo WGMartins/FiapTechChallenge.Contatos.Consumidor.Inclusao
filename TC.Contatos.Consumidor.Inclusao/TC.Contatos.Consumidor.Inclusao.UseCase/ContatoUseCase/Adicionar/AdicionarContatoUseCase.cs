@@ -1,7 +1,6 @@
 ﻿using Domain.Interfaces;
 using Domain.RegionalAggregate;
 using FluentValidation;
-using System.ComponentModel.DataAnnotations;
 using UseCase.Interfaces;
 
 namespace UseCase.ContatoUseCase.Adicionar

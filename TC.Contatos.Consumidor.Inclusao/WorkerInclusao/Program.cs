@@ -8,10 +8,10 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using UseCase.ContatoUseCase.Adicionar;
 using UseCase.Interfaces;
-using WorkerInclusao;
+using Worker;
 
 var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddHostedService<Worker>();
+builder.Services.AddHostedService<WorkerService>();
 
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
@@ -25,7 +25,8 @@ builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 builder.Services.AddScoped<IAdicionarContatoUseCase, AdicionarContatoUseCase>();
 builder.Services.AddScoped<IValidator<AdicionarContatoDto>, AdicionarContatoValidator>();
 
-//RabbitMQ
+#region RabbitMQ
+
 builder.Services.AddSingleton<IMessageConsumer, RabbitMQMessageConsumer>();
 builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQ"));
 
@@ -46,7 +47,8 @@ builder.Services.AddSingleton<Func<Task<IConnection>>>(sp =>
     var factory = sp.GetRequiredService<ConnectionFactory>();
     return () => factory.CreateConnectionAsync();
 });
-//RabbitMQ
+
+#endregion
 
 var host = builder.Build();
 host.Run();
