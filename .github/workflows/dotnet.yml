@@ -113,7 +113,7 @@ jobs:
 
     - name: Apply migration Job
       run: |
-          kubectl apply -f db-migrate-job.yaml
+          kubectl apply -f TC.Contatos.Consumidor.Inclusao/db-migrate-job.yaml
           kubectl wait --for=condition=complete --timeout=60s job/db-migrate
           kubectl delete job db-migrate
 
