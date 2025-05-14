@@ -13,6 +13,8 @@ using Worker;
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddHostedService<WorkerService>();
 
+builder.Configuration.AddEnvironmentVariables();
+
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

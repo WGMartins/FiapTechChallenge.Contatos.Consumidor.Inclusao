@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate
+        image: fiaptechchallenge.azurecr.io/contatos.consumidor.inclusao.worker:latest
+        command: ["dotnet", "Infrastructure.dll", "ef", "database", "update"]
+      restartPolicy: Never
+  backoffLimit: 1

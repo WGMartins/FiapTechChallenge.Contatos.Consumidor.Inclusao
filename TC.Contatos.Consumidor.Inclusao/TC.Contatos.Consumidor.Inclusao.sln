@@ -14,8 +14,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{DD191B06-8110-4875-9371-F4854BD68B2F}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yml = compose.yml
+		db-migrate-job.yml = db-migrate-job.yml
 		Dockerfile = Dockerfile
 		prometheus.yaml = prometheus.yaml
+		worker-deployment.yml = worker-deployment.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9284AA56-FB21-46C8-9221-8ED049E8BE27}"
