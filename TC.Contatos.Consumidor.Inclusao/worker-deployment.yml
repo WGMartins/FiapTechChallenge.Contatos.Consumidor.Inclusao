@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: consumidor_inclusao
+  name: consumidor-inclusao
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: consumidor_inclusao
+      app: consumidor-inclusao
   template:
     metadata:
       labels:
-        app: consumidor_inclusao
+        app: consumidor-inclusao
     spec:
       containers:
-      - name: consumidor_inclusao
+      - name: consumidor-inclusao
         image: fiaptechchallenge.azurecr.io/contatos.consumidor.inclusao.worker
         envFrom:
           - configMapRef:
