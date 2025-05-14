@@ -1,6 +1,6 @@
 [![.NET](https://github.com/WGMartins/fiap-tech-challenge-net/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/WGMartins/fiap-tech-challenge-net/actions/workflows/dotnet.yml)
 
-# FIAP Tech Challenge
+# FIAP Tech Challenge 
 
 ## Tema
 
