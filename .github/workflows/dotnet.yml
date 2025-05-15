@@ -86,7 +86,7 @@ jobs:
 
     - name: Criar ou atualizar ConfigMap
       run: |
-          kubectl create configmap configmap-worker2 \
+          kubectl create configmap configmap-worker \
             --from-literal=RabbitMQ__HostName=${{ secrets.RABBITMQ__HOSTNAME }} \
             --from-literal=ConnectionStrings__ConnectionString=${{ secrets.CONNECTIONSTRINGS__CONNECTIONSTRING }} \
             --dry-run=client -o yaml | kubectl apply -f -
