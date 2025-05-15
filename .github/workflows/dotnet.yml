@@ -85,7 +85,7 @@ jobs:
 
     - name: Criar ou atualizar ConfigMap
       run: |
-          kubectl create configmap configmap-worker \
+          kubectl create configmap configmap-worker2 \
             --from-literal=RabbitMQ__HostName=${{ secrets.RABBITMQ__HOSTNAME }} \
             --from-literal=ConnectionStrings__ConnectionString=${{ secrets.CONNECTIONSTRINGS__CONNECTIONSTRING }} \
             --dry-run=client -o yaml | kubectl apply -f -
@@ -109,12 +109,3 @@ jobs:
         imagepullsecrets: |
           ${{ env.REGISTRY_NAME }}-registry-connection
         namespace: ${{ env.NAMESPACE }}
-
-
-    - name: Apply migration Job
-      run: |
-          kubectl apply -f TC.Contatos.Consumidor.Inclusao/db-migrate-job.yaml
-          kubectl wait --for=condition=complete --timeout=60s job/db-migrate
-          kubectl delete job db-migrate
-
-
