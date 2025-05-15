@@ -18,26 +18,36 @@ namespace UseCase.ContatoUseCase.Adicionar
 
         public ContatoAdicionadoDto Adicionar(AdicionarContatoDto adicionarContatoDto)
         {
-            var validacao = _validator.Validate(adicionarContatoDto);
-            if (!validacao.IsValid)
-            {
-                string mensagemValidacao = string.Empty;
-                foreach (var item in validacao.Errors)
+            try
+            {            
+                var validacao = _validator.Validate(adicionarContatoDto);
+                if (!validacao.IsValid)
                 {
-                    mensagemValidacao = string.Concat(mensagemValidacao, item.ErrorMessage, ", ");
+                    string mensagemValidacao = string.Empty;
+                    foreach (var item in validacao.Errors)
+                    {
+                        mensagemValidacao = string.Concat(mensagemValidacao, item.ErrorMessage, ", ");
+                    }
+
+                    throw new Exception(mensagemValidacao.Remove(mensagemValidacao.Length - 2));
                 }
 
-                throw new Exception(mensagemValidacao.Remove(mensagemValidacao.Length - 2));
+                var contato = Contato.Criar(adicionarContatoDto.Id, adicionarContatoDto.Nome, adicionarContatoDto.Telefone, adicionarContatoDto.Email, adicionarContatoDto.RegionalId);
+
+                _contatoRepository.Adicionar(contato);
+
+                return new ContatoAdicionadoDto
+                {
+                    Id = contato.Id,
+                };
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
             }
 
-            var contato = Contato.Criar(adicionarContatoDto.Id, adicionarContatoDto.Nome, adicionarContatoDto.Telefone, adicionarContatoDto.Email, adicionarContatoDto.RegionalId);
-
-            _contatoRepository.Adicionar(contato);
-
-            return new ContatoAdicionadoDto
-            {
-                Id = contato.Id,
-            };
+            return null;
         }
     }
 }
