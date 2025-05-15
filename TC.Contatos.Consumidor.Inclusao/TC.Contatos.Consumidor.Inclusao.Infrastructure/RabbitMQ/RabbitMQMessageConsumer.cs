@@ -48,6 +48,7 @@ public class RabbitMQMessageConsumer : IMessageConsumer
                     }
                     catch (Exception exception)
                     {
+                        Console.WriteLine(exception.StackTrace);
                         await channel.BasicNackAsync(eventArgs.DeliveryTag, false, false);
                     }
                 };
