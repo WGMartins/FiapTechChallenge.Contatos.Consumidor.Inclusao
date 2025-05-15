@@ -55,10 +55,7 @@ public class RabbitMQMessageConsumer : IMessageConsumer
                 await channel.BasicConsumeAsync(
                         queue: _settings.Value.Queue,
                         autoAck: false,
-                        consumer: consumer);
-
-                    Console.WriteLine(" Press [enter] to exit.");
-                    Console.ReadLine();
+                        consumer: consumer);                    
             }
         }
         catch (Exception ex)
