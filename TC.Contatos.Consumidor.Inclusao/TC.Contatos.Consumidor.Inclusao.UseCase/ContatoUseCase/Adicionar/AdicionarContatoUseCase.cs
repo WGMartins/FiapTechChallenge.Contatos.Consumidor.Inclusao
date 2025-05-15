@@ -45,9 +45,8 @@ namespace UseCase.ContatoUseCase.Adicionar
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
-            }
-
-            return null;
+                return null;
+            }            
         }
     }
 }
