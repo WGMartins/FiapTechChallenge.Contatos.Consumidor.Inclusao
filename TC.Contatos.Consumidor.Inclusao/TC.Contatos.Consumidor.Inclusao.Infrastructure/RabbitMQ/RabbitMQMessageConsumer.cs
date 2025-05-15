@@ -27,35 +27,35 @@ public class RabbitMQMessageConsumer : IMessageConsumer
         {
             var connection = await _connectionFactory();
 
-            using var channel = await connection.CreateChannelAsync();
+            var channel = await connection.CreateChannelAsync();
+
+            var consumer = new AsyncEventingBasicConsumer(channel);
+
+            consumer.ReceivedAsync += async (sender, eventArgs) =>
             {
-
-                var consumer = new AsyncEventingBasicConsumer(channel);
-
-                consumer.ReceivedAsync += async (sender, eventArgs) =>
+                try
                 {
-                    try
-                    {
-                        var body = eventArgs.Body.ToArray();
-                        var message = Encoding.UTF8.GetString(body);
-                        var contato = JsonSerializer.Deserialize<Contato>(message);
+                    var body = eventArgs.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body);
+                    var contato = JsonSerializer.Deserialize<Contato>(message);
 
-                        if (OnMessageReceived != null)
-                        {
-                            await OnMessageReceived(contato);
-                        }
-                    }
-                    catch (Exception exception)
+                    if (OnMessageReceived != null)
                     {
-                        Console.WriteLine(exception.StackTrace);
+                        await OnMessageReceived(contato);
+                        await channel.BasicAckAsync(eventArgs.DeliveryTag, false);
                     }
-                };
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.StackTrace);
+                    await channel.BasicNackAsync(eventArgs.DeliveryTag, false, false);
+                }
+            };
 
-                await channel.BasicConsumeAsync(
-                        queue: _settings.Value.Queue,
-                        autoAck: true,
-                        consumer: consumer);                    
-            }
+            await channel.BasicConsumeAsync(
+                    queue: _settings.Value.Queue,
+                    autoAck: false,
+                    consumer: consumer);
         }
         catch (Exception ex)
         {
