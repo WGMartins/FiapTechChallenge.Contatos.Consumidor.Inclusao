@@ -15,11 +15,9 @@ builder.Services.AddHostedService<WorkerService>();
 
 builder.Configuration.AddEnvironmentVariables();
 
-var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString("ConnectionString"));
+    options.UseNpgsql(builder.Configuration.GetSection("ConnectionStrings")["ConnectionString"]);
 }, ServiceLifetime.Scoped);
 
 builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
