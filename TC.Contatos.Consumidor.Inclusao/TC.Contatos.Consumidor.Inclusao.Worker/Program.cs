@@ -39,8 +39,6 @@ builder.Services.AddSingleton<ConnectionFactory>(sp =>
         UserName = settings.UserName,
         Password = settings.Password,
         VirtualHost = settings.VirtualHost,
-        AutomaticRecoveryEnabled = true,
-        NetworkRecoveryInterval = TimeSpan.FromSeconds(10)
     };
 });
 

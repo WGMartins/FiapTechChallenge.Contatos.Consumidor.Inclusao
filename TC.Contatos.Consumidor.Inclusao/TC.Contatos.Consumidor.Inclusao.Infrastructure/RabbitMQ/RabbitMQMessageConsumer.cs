@@ -43,19 +43,17 @@ public class RabbitMQMessageConsumer : IMessageConsumer
                         if (OnMessageReceived != null)
                         {
                             await OnMessageReceived(contato);
-                            await channel.BasicAckAsync(eventArgs.DeliveryTag, false);
                         }
                     }
                     catch (Exception exception)
                     {
                         Console.WriteLine(exception.StackTrace);
-                        await channel.BasicNackAsync(eventArgs.DeliveryTag, false, false);
                     }
                 };
 
                 await channel.BasicConsumeAsync(
                         queue: _settings.Value.Queue,
-                        autoAck: false,
+                        autoAck: true,
                         consumer: consumer);                    
             }
         }
