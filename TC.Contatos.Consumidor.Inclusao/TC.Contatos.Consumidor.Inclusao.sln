@@ -12,17 +12,26 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "TC.Contatos.Consumidor.Inclusao.UnitTest\UnitTest.csproj", "{88605868-F71A-489D-9AD7-8728A2BCBFFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{DD191B06-8110-4875-9371-F4854BD68B2F}"
-	ProjectSection(SolutionItems) = preProject
-		compose.yml = compose.yml
-		db-migrate-job.yml = db-migrate-job.yml
-		Dockerfile = Dockerfile
-		prometheus.yaml = prometheus.yaml
-		worker-deployment.yml = worker-deployment.yml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9284AA56-FB21-46C8-9221-8ED049E8BE27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "TC.Contatos.Consumidor.Inclusao.Worker\Worker.csproj", "{50A1EE8E-7D73-40DF-9EC0-BE4195F3803D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{87D18746-213F-4C6D-9185-BAE4C50B4843}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{9A195F07-33B8-4756-B29C-5AE13926920A}"
+	ProjectSection(SolutionItems) = preProject
+		worker-deployment.yml = worker-deployment.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{09853B9E-E257-4DD8-AC0A-252F24B01B0F}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yml = compose.yml
+		prometheus.yaml = prometheus.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +69,8 @@ Global
 		{88C7CC37-695B-4A4F-B502-35842ABAA177} = {DD191B06-8110-4875-9371-F4854BD68B2F}
 		{88605868-F71A-489D-9AD7-8728A2BCBFFC} = {9284AA56-FB21-46C8-9221-8ED049E8BE27}
 		{50A1EE8E-7D73-40DF-9EC0-BE4195F3803D} = {DD191B06-8110-4875-9371-F4854BD68B2F}
+		{9A195F07-33B8-4756-B29C-5AE13926920A} = {87D18746-213F-4C6D-9185-BAE4C50B4843}
+		{09853B9E-E257-4DD8-AC0A-252F24B01B0F} = {87D18746-213F-4C6D-9185-BAE4C50B4843}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {970403D0-EEDC-46A8-B047-1657C0F54435}
