@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: consumidor-inclusao-worker-deployment
+  name: consumidor-inclusao-worker
   labels:
     app: consumidor-worker
 spec:
