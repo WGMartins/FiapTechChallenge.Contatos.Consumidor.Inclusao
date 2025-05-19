@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: consumidor-inclusao-worker
   labels:
-    app: consumidor-worker
+    app: consumidor-inclusao-worker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: consumidor-worker
+      app: consumidor-inclusao-worker
   template:
     metadata:
       labels:
-        app: consumidor-worker
+        app: consumidor-inclusao-worker
     spec:
       containers:
       - name: consumidor-inclusao-worker
         image: fiaptechchallenge.azurecr.io/contatos.consumidor.inclusao.worker
         envFrom:
           - configMapRef:
-             name: configmap-worker
+             name: consumidor-inclusao-worker
