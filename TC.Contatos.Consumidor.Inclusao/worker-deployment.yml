@@ -19,4 +19,4 @@ spec:
         image: fiaptechchallenge.azurecr.io/contatos.consumidor.inclusao.worker
         envFrom:
           - configMapRef:
-             name: consumidor-inclusao-worker
+             name: configmap-worker
